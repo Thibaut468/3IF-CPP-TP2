@@ -27,11 +27,23 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+void TrajetSimple::Affichage () const
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel à l'affichage de <TrajetSimple>" << endl;
+#endif
 
+  Trajet::Affichage();
+  cout <<" Trajet Simple. Moyen de transport : " << moyenTransport << endl;
+
+  //Affichage des etapes
+} //----- Fin de Affichage
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetSimple::TrajetSimple ( const char* vDepart, const char* vArrivee, const char* mTransport ) : Trajet( const char* vDepart, const char* vArrivee )
+TrajetSimple::TrajetSimple (const char* vDepart, const char* vArrivee, const char* mTransport) : Trajet(vDepart, vArrivee)
 // Algorithme :
 //
 {

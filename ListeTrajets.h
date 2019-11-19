@@ -49,7 +49,7 @@ public:
     // Contrat :
     //
 
-    void AddTrajetSimple(const char* vDepart, const char* vArrivee);
+    void AddTrajetSimple(const char* vDepart, const char* vArrivee, const char* moyenTransport);
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,7 +65,7 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    ListeTrajets ( );
+    ListeTrajets (const int taille = NBAUGMENTATION);
     // Mode d'emploi :
     //
     // Contrat :

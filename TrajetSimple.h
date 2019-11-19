@@ -35,17 +35,14 @@ public:
     // Contrat :
     //
 
-
-
-
 //-------------------------------------------- Constructeurs - destructeur
-    TrajetSimple ( const char* vDepart, const char* vArrivee, const char* mTransport );
+    TrajetSimple (const char* vDepart, const char* vArrivee, const char* mTransport);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~TrajetSimple ( );
+    virtual ~TrajetSimple();
     // Mode d'emploi :
     //
     // Contrat :

@@ -16,6 +16,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "ListeTrajets.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -42,19 +44,20 @@ int ListeTrajets::GetNbTrajets() const
   return nbTrajets;
 } //----- Fin de getNbTrajets
 
-void ListeTrajets::addTrajetSimple(const char* vDepart, const char* vArrivee)
+void ListeTrajets::AddTrajetSimple(const char* vDepart, const char* vArrivee, const char* moyenTransport)
 // Algorithme :
 //
 {
-   Trajet * nouveauTrajet = new Trajet(vDepart,vArrivee);
+   TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee, moyenTransport);
 
    if(nbTrajets==tailleMax)
    {
       augmenterTaille();
    }
-   
+
    liste[nbTrajets] = nouveauTrajet;
-   nbTrajets++;
+   nbTrajets=nbTrajets+1;
+   std::cout << "Trajet n°" << nbTrajets << endl;
 } //----- Fin de addTrajetSimple
 
 void ListeTrajets::AddTrajetCompose()
@@ -68,7 +71,7 @@ void ListeTrajets::AddTrajetCompose()
 
 //-------------------------------------------- Constructeurs - destructeur
 
-ListeTrajets::ListeTrajets ( ) : tailleMax(NBAUGMENTATION), nbTrajets(0)
+ListeTrajets::ListeTrajets (const int taille) : tailleMax(taille), nbTrajets(0)
 // Algorithme :
 //
 {

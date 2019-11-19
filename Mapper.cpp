@@ -30,10 +30,11 @@ int main()
    // CREER UNE CLASSE MENU
    bool end = false;
 
-   Catalogue catalogue;
+   Catalogue catalogue = Catalogue();
 
-   const char ville1[] = "Lyon";
-   const char ville2[] = "Angers";
+   catalogue.GetListeTraj().AddTrajetSimple("Lyon","Paris","Bateau");
+   catalogue.GetListeTraj().AddTrajetSimple("Marseille","Bordeaux","Avion");
+   catalogue.GetListeTraj().AddTrajetSimple("Lyon","Angers","Train");
 
    while(!end)
    {
@@ -51,11 +52,11 @@ int main()
             end=true;
             break;
          case 1:
-            catalogue.GetListeTraj().AddTrajetSimple(ville1,ville2);
             break;
          case 2:
             break;
          case 3:
+            catalogue.Presenter();
             break;
          default:
             cout << "Saisie du choix incorrect. Recommencer." << endl;

@@ -32,10 +32,10 @@ void TrajetCompose::Affichage () const
 
   Trajet::Affichage();
   cout <<" Trajet composé. Liste des Etapes: " << endl;
-  Trajet** Trajets=liste.GetListe();
+  Trajet** trajets=liste.GetListe();
   for(int i=0;i<nbTrajets;i++)
   {
-  (Trajets[i])->Affichage();
+    trajets[i]->Affichage();
   }
   //Affichage des etapes
 } //----- Fin de Affichage
@@ -43,7 +43,7 @@ void TrajetCompose::Affichage () const
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets liste ) : Trajet( vDepart , vArrivee )
+TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets liste ) : Trajet(vDepart , vArrivee)
 // Algorithme :
 //
 {
