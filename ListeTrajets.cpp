@@ -35,6 +35,13 @@ Trajet ** ListeTrajets::GetListe() const
   return liste;
 } //----- Fin de GetListe
 
+int ListeTrajets::GetNbTrajets() const
+// Algorithme :
+//
+{
+  return nbTrajets;
+} //----- Fin de getNbTrajets
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur

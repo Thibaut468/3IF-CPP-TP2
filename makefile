@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-g -Wall -Werror -DMAP
+CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11 -DMAP
 
 MAIN=exec
 SRCS=Mapper.cpp

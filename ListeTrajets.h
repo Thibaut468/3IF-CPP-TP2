@@ -55,9 +55,15 @@ public:
 
     Trajet ** GetListe() const;
     // Mode d'emploi :
-     //
-     // Contrat :
-     //
+    //
+    // Contrat :
+    //
+
+    int GetNbTrajets() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------------------------ PRIVE
 
