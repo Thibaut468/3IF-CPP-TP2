@@ -19,7 +19,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-
+#include "Catalogue.h"
 
 //----------------------------------------------------------------- PUBLIC
 //----------------------------------------------------- Fonctions publiques
@@ -29,6 +29,11 @@ int main()
 
    // CREER UNE CLASSE MENU
    bool end = false;
+
+   Catalogue catalogue;
+
+   const char ville1[] = "Lyon";
+   const char ville2[] = "Angers";
 
    while(!end)
    {
@@ -46,6 +51,7 @@ int main()
             end=true;
             break;
          case 1:
+            catalogue.GetListeTraj().AddTrajetSimple(ville1,ville2);
             break;
          case 2:
             break;

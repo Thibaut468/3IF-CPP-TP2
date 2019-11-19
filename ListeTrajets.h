@@ -37,6 +37,30 @@ public:
     // Contrat :
     //
 
+    Trajet ** GetListe() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int GetNbTrajets() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void AddTrajetSimple(const char* vDepart, const char* vArrivee);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void AddTrajetCompose();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -48,18 +72,6 @@ public:
     //
 
     virtual ~ListeTrajets ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    Trajet ** GetListe() const;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    int GetNbTrajets() const;
     // Mode d'emploi :
     //
     // Contrat :

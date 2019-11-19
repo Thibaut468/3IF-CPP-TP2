@@ -42,6 +42,28 @@ int ListeTrajets::GetNbTrajets() const
   return nbTrajets;
 } //----- Fin de getNbTrajets
 
+void ListeTrajets::addTrajetSimple(const char* vDepart, const char* vArrivee)
+// Algorithme :
+//
+{
+   Trajet * nouveauTrajet = new Trajet(vDepart,vArrivee);
+
+   if(nbTrajets==tailleMax)
+   {
+      augmenterTaille();
+   }
+   
+   liste[nbTrajets] = nouveauTrajet;
+   nbTrajets++;
+} //----- Fin de addTrajetSimple
+
+void ListeTrajets::AddTrajetCompose()
+// Algorithme :
+//
+{
+
+} //----- Fin de AddTrajetCompose
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur

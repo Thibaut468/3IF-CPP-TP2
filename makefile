@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11 -DMAP
 
 MAIN=exec
-SRCS=Mapper.cpp
+SRCS=Mapper.cpp Catalogue.cpp ListeTrajets.cpp Trajet.cpp TrajetSimple.cpp TrajetCompose.cpp
 OBJS=$(SRCS:.c=.o)
 
 $(MAIN): $(OBJS)
