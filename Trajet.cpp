@@ -22,11 +22,15 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Trajet::Méthode ( liste des paramètres )
+ void Trajet::Affichage () const
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+#ifdef MAP
+    cout << "Appel a l'affichage de <Trajet>" << endl;
+#endif
+  cout << "Trajet de: " << villeDepart << " à " << villeArrivee << endl;
+} //----- Fin de Affichage
 
 
 

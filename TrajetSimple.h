@@ -10,6 +10,7 @@
 #if ! defined ( TRAJETSIMPLE_H )
 #define TRAJETSIMPLE_H
 
+#include "Trajet.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -28,7 +29,7 @@ class TrajetSimple : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    void Affichage() const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -56,7 +57,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-  const char* moyenTransport;
+  char* moyenTransport;
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetSimple>

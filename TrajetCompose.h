@@ -10,6 +10,8 @@
 #if ! defined ( TRAJETCOMPOSE_H )
 #define TRAJETCOMPOSE_H
 
+#include "Trajet.h"
+#include "ListeTrajets.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -28,7 +30,7 @@ class TrajetCompose : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    void Affichage () const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -39,7 +41,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    TrajetCompose ( const char* vDepart, const char* vArrivee );
+    TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets liste );
     // Mode d'emploi :
     //
     // Contrat :
@@ -57,6 +59,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+ListeTrajets liste;
+int nbTrajets;
 
 };
 

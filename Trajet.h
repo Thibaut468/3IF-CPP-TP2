@@ -28,11 +28,12 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+  virtual void Affichage () const;
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
+
 
 
 

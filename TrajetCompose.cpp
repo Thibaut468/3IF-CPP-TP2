@@ -22,22 +22,38 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type TrajetCompose::Méthode ( liste des paramètres )
+void TrajetCompose::Affichage () const
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+#ifdef MAP
+    cout << "Appel à l'affichage de <TrajetCompose>" << endl;
+#endif
+
+  Trajet::Affichage();
+  cout <<" Trajet composé. Liste des Etapes: " << endl;
+  Trajet** Trajets=liste.GetListe();
+  for(int i=0;i<nbTrajets;i++)
+  {
+  (Trajets[i])->Affichage();
+  }
+  //Affichage des etapes
+} //----- Fin de Affichage
 
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( )
+TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets liste ) : Trajet( vDepart , vArrivee )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
+
+  this->liste=liste;
+  nbTrajets=liste.GetNbTrajets();
+
 } //----- Fin de TrajetCompose
 
 
