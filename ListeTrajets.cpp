@@ -44,12 +44,10 @@ int ListeTrajets::GetNbTrajets() const
   return nbTrajets;
 } //----- Fin de getNbTrajets
 
-void ListeTrajets::AddTrajetSimple(const char* vDepart, const char* vArrivee, const char* moyenTransport)
+void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
 // Algorithme :
 //
 {
-   TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee, moyenTransport);
-
    if(nbTrajets==tailleMax)
    {
       augmenterTaille();
@@ -58,14 +56,9 @@ void ListeTrajets::AddTrajetSimple(const char* vDepart, const char* vArrivee, co
    liste[nbTrajets] = nouveauTrajet;
    nbTrajets=nbTrajets+1;
    std::cout << "Trajet n°" << nbTrajets << endl;
-} //----- Fin de addTrajetSimple
+} //----- Fin de addTrajet
 
-void ListeTrajets::AddTrajetCompose()
-// Algorithme :
-//
-{
 
-} //----- Fin de AddTrajetCompose
 
 //------------------------------------------------- Surcharge d'opérateurs
 

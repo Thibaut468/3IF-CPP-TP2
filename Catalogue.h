@@ -52,7 +52,7 @@ public:
     // Contrat :
     //
 
-    //void AddTrajetCompose();
+    void AddTrajetCompose();
     // Mode d'emploi :
     //
     // Contrat :
@@ -90,19 +90,19 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-   char * AskVilleArrivee() const;
+   char * askVilleArrivee();
    // Mode d'emploi :
    //
    // Contrat :
    //
 
-   char * AskVilleDepart() const;
+   char * askVilleDepart();
    // Mode d'emploi :
    //
    // Contrat :
    //
 
-   char * AskMoyenTransport() const;
+   char * askMoyenTransport();
    // Mode d'emploi :
    //
    // Contrat :

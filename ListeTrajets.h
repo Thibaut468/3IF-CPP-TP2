@@ -49,13 +49,7 @@ public:
     // Contrat :
     //
 
-    void AddTrajetSimple(const char* vDepart, const char* vArrivee, const char* moyenTransport);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    void AddTrajetCompose();
+    void AddTrajet(Trajet* nouveauTrajet);
     // Mode d'emploi :
     //
     // Contrat :

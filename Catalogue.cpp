@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
@@ -28,16 +29,73 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void ListeTrajets::AddTrajetSimple()
+void Catalogue::AddTrajetSimple()
 // Algorithme :
 //
 {
-   char * vDepart = AskVilleDepart();
-   char * vArrivee = AskVilleArrivee();
-   char * vMoyenTransport = AskMoyenTransport();
+   char * vDepart = askVilleDepart();
+   char * vArrivee =askVilleArrivee();
+   char * vMoyenTransport = askMoyenTransport();
    TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
    listeTraj.AddTrajet(nouveauTrajet);
 } //----- Fin de addTrajetSimple
+
+void Catalogue::AddTrajetCompose()
+// Algorithme :
+//
+{
+  int nbTrajets;
+  ListeTrajets liste;
+  cout<<"Nombre de trajets ?"<<endl;
+  cin >> nbTrajets;
+  while(cin.fail())
+  {
+      cout << "Erreur, veuillez entrer un entier" <<endl;
+      cin.clear();          //on clear le buffer
+      cin.ignore(256,'\n'); // on ignore les caractères jusqu'a obtenir un retour à la ligne
+      cin >> nbTrajets;             //on redemande la valeur
+  }
+
+  char* vArriveePrecedent;
+  char* vDepart=askVilleDepart();
+  char* vArrivee=askVilleArrivee();
+  char* mTransport=askMoyenTransport();
+  TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+  liste.AddTrajet(tmpTrajet);
+  vArriveePrecedent=vArrivee;
+
+  for(int i=1;i<nbTrajets;i++)
+  {
+    vDepart=askVilleDepart();
+    vArrivee=askVilleArrivee();
+    mTransport=askMoyenTransport();
+
+    if(strcmp(vDepart,vArriveePrecedent)==0)
+    {
+      TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+      liste.AddTrajet(tmpTrajet);
+      vArriveePrecedent=vArrivee;
+    }
+    else
+    {
+      while(strcmp(vDepart,vArriveePrecedent)!=0)
+      {
+          cout << "Erreur, vous devez repartir de la ville d'étape précédente" <<endl;
+          vDepart=askVilleDepart();
+          vArrivee=askVilleArrivee();
+          mTransport=askMoyenTransport();
+      }
+      TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+      liste.AddTrajet(tmpTrajet);
+      vArriveePrecedent=vArrivee;
+    }
+
+  }
+
+
+
+} //----- Fin de AddTrajetCompose
+
 
 void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
 // Algorithme :
@@ -101,33 +159,33 @@ Catalogue::~Catalogue ( )
 
 //------------------------------------------------------------------ PRIVE
 
-char * AskVilleArrivee() const
+char * askVilleArrivee()
 // Algorithme :
 //
 {
-   char * ret[TAILLE_ENTREE_VILLE];
+   char* ret=new char(TAILLE_ENTREE_VILLE);
    cout << "Saisir la ville de départ : " << endl;
-   cin >> ret;
+   cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskVilleDepart
 
-char * AskVilleDepart() const
+char * askVilleDepart()
 // Algorithme :
 //
 {
-   char * ret[TAILLE_ENTREE_VILLE];
+  char* ret=new char(TAILLE_ENTREE_VILLE);
    cout << "Saisir la ville d'arrivée : " << endl;
-   cin >> ret;
+   cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskVilleArrivee
 
-char * AskMoyenTransport() const
+char * askMoyenTransport()
 // Algorithme :
 //
 {
-   char * ret[TAILLE_ENTREE_MOYEN_TRANSPORT];
+   char* ret=new char(TAILLE_ENTREE_VILLE);
    cout << "Saisir le moyen de transport : " << endl;
-   cin >> ret;
+   cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskMoyenTransport
 
