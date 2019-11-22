@@ -32,10 +32,6 @@ int main()
 
    Catalogue catalogue = Catalogue();
 
-   catalogue.GetListeTraj().AddTrajetSimple("Lyon","Paris","Bateau");
-   catalogue.GetListeTraj().AddTrajetSimple("Marseille","Bordeaux","Avion");
-   catalogue.GetListeTraj().AddTrajetSimple("Lyon","Angers","Train");
-
    while(!end)
    {
       cout << "Menu:" << endl;
@@ -52,8 +48,10 @@ int main()
             end=true;
             break;
          case 1:
+            catalogue.AddTrajetSimple();
             break;
          case 2:
+            catalogue.AddTrajetCompose();
             break;
          case 3:
             catalogue.Presenter();

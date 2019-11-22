@@ -28,12 +28,12 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-ListeTrajets Catalogue::GetListeTraj()
+void ListeTrajets::AddTrajetSimple()
 // Algorithme :
 //
 {
-   return listeTraj;
-} //----- Fin de GetListeTraj
+   listeTraj.AddTrajet(CreateTrajetSimple());
+} //----- Fin de addTrajetSimple
 
 void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
 // Algorithme :
@@ -96,5 +96,46 @@ Catalogue::~Catalogue ( )
 
 
 //------------------------------------------------------------------ PRIVE
+
+char * AskVilleArrivee() const
+// Algorithme :
+//
+{
+   char * ret[TAILLE_ENTREE_VILLE];
+   cout << "Saisir la ville de départ : " << endl;
+   cin >> ret;
+   return ret;
+} //----- Fin de AskVilleDepart
+
+char * AskVilleDepart() const
+// Algorithme :
+//
+{
+   char * ret[TAILLE_ENTREE_VILLE];
+   cout << "Saisir la ville d'arrivée : " << endl;
+   cin >> ret;
+   return ret;
+} //----- Fin de AskVilleArrivee
+
+char * AskMoyenTransport() const
+// Algorithme :
+//
+{
+   char * ret[TAILLE_ENTREE_MOYEN_TRANSPORT];
+   cout << "Saisir le moyen de transport : " << endl;
+   cin >> ret;
+   return ret;
+} //----- Fin de AskMoyenTransport
+
+TrajetSimple * Catalogue::CreateTrajetSimple() const
+// Algorithme :
+//
+{
+   char * vDepart = AskVilleDepart();
+   char * vArrivee = AskVilleArrivee();
+   char * vMoyenTransport = AskMoyenTransport();
+   TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
+   return nouveauTrajet;
+} //----- Fin de CreateTrajetSimple
 
 //----------------------------------------------------- Méthodes protégées

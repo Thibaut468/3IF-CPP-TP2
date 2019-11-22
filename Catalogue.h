@@ -12,7 +12,14 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "ListeTrajets.h"
+#include "Trajet.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
+
 //------------------------------------------------------------- Constantes
+
+const int TAILLE_ENTREE_VILLE = 45;
+const int TAILLE_ENTREE_MOYEN_TRANSPORT = 20;
 
 //------------------------------------------------------------------ Types
 
@@ -39,6 +46,18 @@ public:
     // Contrat :
     //
 
+    void AddTrajetSimple();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    //void AddTrajetCompose();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     void RechercheSimple(const char * vDepart, const char* vArrivee);
     // Mode d'emploi :
     //
@@ -46,12 +65,6 @@ public:
     //
 
     void RechercheComplexe(const char * vDepart, const char* vArrivee);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    ListeTrajets GetListeTraj();
     // Mode d'emploi :
     //
     // Contrat :
@@ -77,6 +90,29 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+   char * AskVilleArrivee() const;
+   // Mode d'emploi :
+   //
+   // Contrat :
+   //
+
+   char * AskVilleDepart() const;
+   // Mode d'emploi :
+   //
+   // Contrat :
+   //
+
+   char * AskMoyenTransport() const;
+   // Mode d'emploi :
+   //
+   // Contrat :
+   //
+
+   TrajetSimple * CreateTrajetSimple() const;
+   // Mode d'emploi :
+   //
+   // Contrat :
+   //
 
 //----------------------------------------------------- Attributs protégés
 
