@@ -48,14 +48,17 @@ void Catalogue::AddTrajetCompose()
   ListeTrajets liste;
   cout<<"Nombre de trajets ?"<<endl;
   cin >> nbTrajets;
+  cin.ignore();
   while(cin.fail())
   {
       cout << "Erreur, veuillez entrer un entier" <<endl;
-      cin.clear();          //on clear le buffer
-      cin.ignore(256,'\n'); // on ignore les caractères jusqu'a obtenir un retour à la ligne
-      cin >> nbTrajets;             //on redemande la valeur
+      cin.clear();          //on clear les erreurs
+      cin.ignore();         // on ignore le prochain caractère
+      cin >> nbTrajets;             //on redemande la valeur;
+      cin.ignore();
   }
-
+  char *vDepartPrincipale;
+  char*vArriveePrincipale;
   char* vArriveePrecedent;
   char* vDepart=askVilleDepart();
   char* vArrivee=askVilleArrivee();
@@ -63,6 +66,7 @@ void Catalogue::AddTrajetCompose()
   TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
   liste.AddTrajet(tmpTrajet);
   vArriveePrecedent=vArrivee;
+  vDepartPrincipale=vDepart;
 
   for(int i=1;i<nbTrajets;i++)
   {
@@ -91,7 +95,9 @@ void Catalogue::AddTrajetCompose()
     }
 
   }
-
+  vArriveePrincipale=vArrivee;
+  TrajetCompose* nouveauTrajetCompose=new TrajetCompose(vDepartPrincipale,vArriveePrincipale,liste);
+  listeTraj.AddTrajet(nouveauTrajetCompose);
 
 
 } //----- Fin de AddTrajetCompose

@@ -42,6 +42,7 @@ int main()
 
       int choix;
       cin>>choix;
+      cin.ignore();
 
       switch (choix) {
          case 0:
