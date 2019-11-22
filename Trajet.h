@@ -34,8 +34,17 @@ public:
   // Contrat :
   //
 
+  char* GetVilleDepart() const;
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
 
-
+  char* GetVilleArrivee() const;
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
 
 //-------------------------------------------- Constructeurs - destructeur
     Trajet (const char* vDepart,const char* vArrivee);

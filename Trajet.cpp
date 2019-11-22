@@ -32,7 +32,19 @@ using namespace std;
   cout << "Trajet de: " << villeDepart << " à " << villeArrivee << endl;
 } //----- Fin de Affichage
 
+char* Trajet::GetVilleDepart () const
+// Algorithme :
+//
+{
+   return villeDepart;
+} //----- Fin de GetVilleDepart
 
+char* Trajet::GetVilleArrivee () const
+// Algorithme :
+//
+{
+   return villeArrivee;
+} //----- Fin de GetVilleArrivee
 
 //-------------------------------------------- Constructeurs - destructeur
 Trajet::Trajet ( const char* vDepart, const char* vArrivee )

@@ -108,14 +108,25 @@ void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
 //
 {
 
-} //----- Fin de GetListeTraj
+   cout << "-- Résultat de la recherche simple entre " << vDepart << " et " << vArrivee << " --" << endl;
+
+   Trajet ** listeTmp = listeTraj.GetListe();
+   int nbTrajets = listeTraj.GetNbTrajets();
+   for(int i=0;i<nbTrajets;i++)
+   {
+      if(strcmp(listeTmp[i]->GetVilleDepart(),vDepart)==0 && strcmp(listeTmp[i]->GetVilleArrivee(),vArrivee)==0)
+         listeTmp[i]->Affichage();
+
+   }
+} //----- Fin de RechercheSimple
+
 
 void Catalogue::RechercheComplexe(const char * vDepart, const char* vArrivee)
 // Algorithme :
 //
 {
 
-} //----- Fin de GetListeTraj
+} //----- Fin de RechercheComplexe
 
 void Catalogue::Presenter()
 // Algorithme :
