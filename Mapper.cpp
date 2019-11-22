@@ -38,6 +38,8 @@ int main()
       cout << "\t1: Ajouter un trajet simple" << endl;
       cout << "\t2: Ajouter un trajet composé" << endl;
       cout << "\t3: Afficher le catalogue" << endl;
+      cout << "\t4: Recherche simple" << endl;
+      cout << "\t5: Recherche complexe" << endl;
       cout << "\t0: Quitter l'application Mapper" << endl;
 
       int choix;
@@ -56,6 +58,12 @@ int main()
             break;
          case 3:
             catalogue.Presenter();
+            break;
+         case 4:
+            catalogue.RechercheSimple();
+            break;
+         case 5:
+            catalogue.RechercheComplexe();
             break;
          default:
             cout << "Saisie du choix incorrect. Recommencer." << endl;

@@ -34,7 +34,7 @@ void Catalogue::AddTrajetSimple()
 //
 {
    char * vDepart = askVilleDepart();
-   char * vArrivee =askVilleArrivee();
+   char * vArrivee = askVilleArrivee();
    char * vMoyenTransport = askMoyenTransport();
    TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
    listeTraj.AddTrajet(nouveauTrajet);
@@ -58,7 +58,7 @@ void Catalogue::AddTrajetCompose()
       cin.ignore();
   }
   char *vDepartPrincipale;
-  char*vArriveePrincipale;
+  char* vArriveePrincipale;
   char* vArriveePrecedent;
   char* vDepart=askVilleDepart();
   char* vArrivee=askVilleArrivee();
@@ -103,10 +103,13 @@ void Catalogue::AddTrajetCompose()
 } //----- Fin de AddTrajetCompose
 
 
-void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
+void Catalogue::RechercheSimple()
 // Algorithme :
 //
 {
+
+   char * vDepart=askVilleDepart();
+   char * vArrivee=askVilleArrivee();
 
    cout << "-- Résultat de la recherche simple entre " << vDepart << " et " << vArrivee << " --" << endl;
 
@@ -121,10 +124,13 @@ void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
 } //----- Fin de RechercheSimple
 
 
-void Catalogue::RechercheComplexe(const char * vDepart, const char* vArrivee)
+void Catalogue::RechercheComplexe()
 // Algorithme :
 //
 {
+
+   char * vDepart=askVilleDepart();
+   char * vArrivee=askVilleArrivee();
 
 } //----- Fin de RechercheComplexe
 

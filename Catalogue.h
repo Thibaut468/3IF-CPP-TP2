@@ -58,13 +58,13 @@ public:
     // Contrat :
     //
 
-    void RechercheSimple(const char * vDepart, const char* vArrivee);
+    void RechercheSimple();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void RechercheComplexe(const char * vDepart, const char* vArrivee);
+    void RechercheComplexe();
     // Mode d'emploi :
     //
     // Contrat :
