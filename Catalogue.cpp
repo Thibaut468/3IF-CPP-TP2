@@ -32,7 +32,11 @@ void ListeTrajets::AddTrajetSimple()
 // Algorithme :
 //
 {
-   listeTraj.AddTrajet(CreateTrajetSimple());
+   char * vDepart = AskVilleDepart();
+   char * vArrivee = AskVilleArrivee();
+   char * vMoyenTransport = AskMoyenTransport();
+   TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
+   listeTraj.AddTrajet(nouveauTrajet);
 } //----- Fin de addTrajetSimple
 
 void Catalogue::RechercheSimple(const char * vDepart, const char* vArrivee)
@@ -126,16 +130,5 @@ char * AskMoyenTransport() const
    cin >> ret;
    return ret;
 } //----- Fin de AskMoyenTransport
-
-TrajetSimple * Catalogue::CreateTrajetSimple() const
-// Algorithme :
-//
-{
-   char * vDepart = AskVilleDepart();
-   char * vArrivee = AskVilleArrivee();
-   char * vMoyenTransport = AskMoyenTransport();
-   TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
-   return nouveauTrajet;
-} //----- Fin de CreateTrajetSimple
 
 //----------------------------------------------------- Méthodes protégées

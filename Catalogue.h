@@ -107,13 +107,6 @@ protected:
    //
    // Contrat :
    //
-
-   TrajetSimple * CreateTrajetSimple() const;
-   // Mode d'emploi :
-   //
-   // Contrat :
-   //
-
 //----------------------------------------------------- Attributs protégés
 
    ListeTrajets listeTraj;
