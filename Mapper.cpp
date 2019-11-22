@@ -41,7 +41,7 @@ int main()
       cout << "\t0: Quitter l'application Mapper" << endl;
 
       int choix;
-      scanf("%d",&choix);
+      cin>>choix;
 
       switch (choix) {
          case 0:

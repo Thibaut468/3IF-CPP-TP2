@@ -159,27 +159,27 @@ Catalogue::~Catalogue ( )
 
 //------------------------------------------------------------------ PRIVE
 
-char * askVilleArrivee()
+char * Catalogue::askVilleArrivee()
 // Algorithme :
 //
 {
    char* ret=new char(TAILLE_ENTREE_VILLE);
-   cout << "Saisir la ville de départ : " << endl;
+   cout << "Saisir la ville d'arrivée: " << endl;
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskVilleDepart
 
-char * askVilleDepart()
+char * Catalogue::askVilleDepart()
 // Algorithme :
 //
 {
   char* ret=new char(TAILLE_ENTREE_VILLE);
-   cout << "Saisir la ville d'arrivée : " << endl;
+   cout << "Saisir la ville de départ : " << endl;
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskVilleArrivee
 
-char * askMoyenTransport()
+char * Catalogue::askMoyenTransport()
 // Algorithme :
 //
 {
