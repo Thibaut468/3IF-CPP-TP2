@@ -31,12 +31,14 @@ void TrajetCompose::Affichage () const
 #endif
 
   Trajet::Affichage();
+
   cout <<" Trajet composé. Liste des Etapes: " << endl;
+
   Trajet** trajets=liste.GetListe();
-  cout<< "coucou";
+  cout<<nbTrajets;
   for(int i=0;i<nbTrajets;i++)
   {
-    trajets[i]->Affichage();
+    trajets[i]->Trajet::Affichage();
   }
   //Affichage des etapes
 } //----- Fin de Affichage
