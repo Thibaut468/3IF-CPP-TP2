@@ -55,10 +55,37 @@ void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
 
    liste[nbTrajets] = nouveauTrajet;
    nbTrajets=nbTrajets+1;
-   std::cout << "Trajet n°" << nbTrajets << endl;
+   cout << "Trajet n°" << nbTrajets << endl;
 } //----- Fin de addTrajet
 
 
+void ListeTrajets::AffichageTrajets() const
+// Algorithme :
+//
+{
+  for(int i = 0; i < nbTrajets; i++ )
+  {
+    liste[i]->Affichage();
+  }
+} //----- Fin de AffichageTrajets
+
+int ListeTrajets::Retirer(int position)
+// Algorithme :
+//
+{
+  if(position < 0 || position >= nbTrajets)
+  {
+    return -1;
+  }
+  for(int i=position;i<nbTrajets-1;i++)
+  {
+    liste[i]=liste[i+1];
+  }
+  delete liste[nbTrajets-1];
+  nbTrajets--;
+  return 0;
+
+} //----- Fin de Retirer
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -83,7 +110,6 @@ ListeTrajets::~ListeTrajets ( )
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
-
    delete [] liste;
 } //----- Fin de ~ListeTrajets
 

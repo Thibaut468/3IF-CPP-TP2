@@ -34,19 +34,15 @@ void TrajetCompose::Affichage () const
 
   cout <<" Trajet composé. Liste des Etapes: " << endl;
 
-  Trajet** trajets=liste.GetListe();
-  cout<<nbTrajets;
-  for(int i=0;i<nbTrajets;i++)
-  {
-    trajets[i]->Trajet::Affichage();
-  }
+  etapes->AffichageTrajets();
+
   //Affichage des etapes
 } //----- Fin de Affichage
 
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets liste ) : Trajet(vDepart , vArrivee)
+TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets* liste ) : Trajet(vDepart , vArrivee)
 // Algorithme :
 //
 {
@@ -54,8 +50,8 @@ TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const 
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
 
-  this->liste=liste;
-  nbTrajets=liste.GetNbTrajets();
+  etapes=(ListeTrajets*) liste;
+  nbTrajets=etapes->GetNbTrajets();
 
 } //----- Fin de TrajetCompose
 
@@ -67,6 +63,8 @@ TrajetCompose::~TrajetCompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
+
+delete [] etapes;
 } //----- Fin de ~TrajetCompose
 
 

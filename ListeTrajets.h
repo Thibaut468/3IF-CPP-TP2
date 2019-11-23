@@ -55,6 +55,18 @@ public:
     // Contrat :
     //
 
+    void AffichageTrajets() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int Retirer(int position);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
