@@ -38,6 +38,9 @@ void Catalogue::AddTrajetSimple()
    char * vMoyenTransport = askMoyenTransport();
    TrajetSimple * nouveauTrajet = new TrajetSimple(vDepart,vArrivee,vMoyenTransport);
    listeTraj.AddTrajet(nouveauTrajet);
+   delete [] vDepart;
+   delete [] vArrivee;
+   delete [] vMoyenTransport;
 } //----- Fin de addTrajetSimple
 
 void Catalogue::AddTrajetCompose()
@@ -57,49 +60,68 @@ void Catalogue::AddTrajetCompose()
       cin >> nbTrajets;             //on redemande la valeur;
       cin.ignore();
   }
-  char *vDepartPrincipale;
-  char* vArriveePrincipale;
-  char* vArriveePrecedent;
-  char* vDepart=askVilleDepart();
-  char* vArrivee=askVilleArrivee();
-  char* mTransport=askMoyenTransport();
+
+  char vDepartPrincipale[TAILLE_ENTREE_VILLE+1];
+  char vArriveePrincipale[TAILLE_ENTREE_VILLE+1];
+  char vArriveePrecedent[TAILLE_ENTREE_VILLE+1];
+
+  char * vDepart = askVilleDepart();
+  char * vArrivee = askVilleArrivee();
+  char * mTransport = askMoyenTransport();
+
   TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+
   liste->AddTrajet(tmpTrajet);
-  vArriveePrecedent=vArrivee;
-  vDepartPrincipale=vDepart;
+  //vArriveePrecedent=vArrivee;
+  strcpy(vArriveePrecedent,vArrivee);
+  //vDepartPrincipale=vDepart;
+  strcpy(vDepartPrincipale,vDepart);
 
   for(int i=1;i<nbTrajets;i++)
   {
-    vDepart=askVilleDepart();
-    vArrivee=askVilleArrivee();
-    mTransport=askMoyenTransport();
+      delete [] vArrivee;
+      delete [] vDepart;
+      delete [] mTransport;
+      vDepart = askVilleDepart();
+      vArrivee = askVilleArrivee();
+      mTransport = askMoyenTransport();
 
-    if(strcmp(vDepart,vArriveePrecedent)==0)
-    {
-      TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
-      liste->AddTrajet(tmpTrajet);
-      vArriveePrecedent=vArrivee;
-    }
-    else
-    {
-      while(strcmp(vDepart,vArriveePrecedent)!=0)
+      if(strcmp(vDepart,vArriveePrecedent)==0)
       {
-          cout << "Erreur, vous devez repartir de la ville d'étape précédente" <<endl;
-          vDepart=askVilleDepart();
-          vArrivee=askVilleArrivee();
-          mTransport=askMoyenTransport();
+        TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+        liste->AddTrajet(tmpTrajet);
+        //vArriveePrecedent=vArrivee;
+        strcpy(vArriveePrecedent,vArrivee);
       }
-      TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
-      liste->AddTrajet(tmpTrajet);
-      vArriveePrecedent=vArrivee;
-    }
+      else
+      {
+        while(strcmp(vDepart,vArriveePrecedent)!=0)
+        {
+            cout << "Erreur, vous devez repartir de la ville d'étape précédente" <<endl;
+            delete [] vArrivee;
+            delete [] vDepart;
+            delete [] mTransport;
+            vDepart = askVilleDepart();
+            vArrivee = askVilleArrivee();
+            mTransport = askMoyenTransport();
+        }
 
+        TrajetSimple* tmpTrajet=new TrajetSimple(vDepart,vArrivee,mTransport);
+        liste->AddTrajet(tmpTrajet);
+        //vArriveePrecedent=vArrivee;
+        strcpy(vArriveePrecedent,vArrivee);
+      }
   }
-  vArriveePrincipale=vArrivee;
+
+  //vArriveePrincipale=vArrivee;
+  strcpy(vArriveePrincipale,vArrivee);
+
   TrajetCompose* nouveauTrajetCompose=new TrajetCompose(vDepartPrincipale,vArriveePrincipale,liste);
   listeTraj.AddTrajet(nouveauTrajetCompose);
 
-
+  delete [] vArrivee;
+  delete [] vDepart;
+  delete [] mTransport;
 } //----- Fin de AddTrajetCompose
 
 
@@ -217,13 +239,17 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
 //Algorithme : Methode recursive
 //
 {
-    Trajet** liste=listeTraj.GetListe();
+
+    ListeTrajets* trajets=new ListeTrajets(listeTraj);
+    Trajet** liste=trajets->GetListe();
+
     if(strcmp(departTrajet,arriveeFinale)==0) // si ville de départ et d'arrivee sont les mêmes: signifie qu'on à atteint notre destination
     {
+        cout<<"liste des trajets possibles"<<endl;
         trajetsPossibles->AffichageTrajets();
+        cout<<endl<<endl;
         return 1;
     }
-
     for(int i =0;i<listeTraj.GetNbTrajets();i++)
     {
         Trajet* t=liste[i];
@@ -234,19 +260,21 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
 
             for(int j=0;j<trajetsPossibles->GetNbTrajets();j++)
             {
-                if(strcmp(t->GetVilleArrivee(),trajetsPossibles->GetListe()[j]->GetVilleDepart())) //si la ville d'arrivée est déja présente
+                if(strcmp(t->GetVilleArrivee(),trajetsPossibles->GetListe()[j]->GetVilleDepart())==0) //si la ville d'arrivée est déja présente
                 {                                                                     //dans les trajets possible en tant que ville de départ
                     valide=0;        //afin de ne pas créer de boucle infinie
                 }
             }
             if(valide)
             {
+                t->Affichage();
                 trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
                 RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
-                trajetsPossibles->Retirer((trajetsPossibles->GetNbTrajets())-1);        //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
+                trajetsPossibles->RetirerDernier();                                   //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
             }
         }
     }
+    delete trajets;
     return 0;
 }// Fin de RechercheEtape
 

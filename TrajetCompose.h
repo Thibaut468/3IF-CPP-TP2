@@ -41,7 +41,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets* liste );
+    TrajetCompose ( const char* vDepart, const char* vArrivee, ListeTrajets* liste);
     // Mode d'emploi :
     //
     // Contrat :

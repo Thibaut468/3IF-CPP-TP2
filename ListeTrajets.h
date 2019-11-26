@@ -61,7 +61,7 @@ public:
     // Contrat :
     //
 
-    int Retirer(int position);
+    int RetirerDernier();
     // Mode d'emploi :
     //
     // Contrat :
@@ -70,6 +70,12 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+
+    ListeTrajets ( const ListeTrajets & unListeTrajets);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     ListeTrajets (const int taille = NBAUGMENTATION);
     // Mode d'emploi :

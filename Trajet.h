@@ -47,6 +47,13 @@ public:
   //
 
 //-------------------------------------------- Constructeurs - destructeur
+
+    Trajet ( const Trajet & unTrajet );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     Trajet (const char* vDepart,const char* vArrivee);
     // Mode d'emploi :
     //  affecte les valeurs des attributs villes de départ et d'arrivée

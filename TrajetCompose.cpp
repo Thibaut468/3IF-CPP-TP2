@@ -42,7 +42,7 @@ void TrajetCompose::Affichage () const
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const ListeTrajets* liste ) : Trajet(vDepart , vArrivee)
+TrajetCompose::TrajetCompose (const char* vDepart, const char* vArrivee, ListeTrajets* liste) : Trajet(vDepart , vArrivee)
 // Algorithme :
 //
 {
@@ -50,7 +50,7 @@ TrajetCompose::TrajetCompose ( const char* vDepart, const char* vArrivee, const 
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
 
-  etapes=(ListeTrajets*) liste;
+  etapes=liste;
   nbTrajets=etapes->GetNbTrajets();
 
 } //----- Fin de TrajetCompose
@@ -64,7 +64,7 @@ TrajetCompose::~TrajetCompose ( )
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
 
-delete [] etapes;
+delete etapes;
 } //----- Fin de ~TrajetCompose
 
 

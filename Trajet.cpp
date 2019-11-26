@@ -47,6 +47,21 @@ char* Trajet::GetVilleArrivee () const
 } //----- Fin de GetVilleArrivee
 
 //-------------------------------------------- Constructeurs - destructeur
+
+Trajet::Trajet ( const Trajet & unTrajet )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Trajet>" << endl;
+#endif
+    villeDepart = new char [strlen(unTrajet.villeDepart) + 1];
+    villeArrivee = new char [strlen(unTrajet.villeArrivee) + 1];
+    strcpy ( villeDepart, unTrajet.villeDepart );
+    strcpy ( villeArrivee, unTrajet.villeArrivee );
+
+} //----- Fin de Trajet (constructeur de copie)
+
 Trajet::Trajet ( const char* vDepart, const char* vArrivee )
 // Algorithme :
 //

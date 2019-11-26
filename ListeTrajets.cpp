@@ -68,22 +68,11 @@ void ListeTrajets::AffichageTrajets() const
   }
 } //----- Fin de AffichageTrajets
 
-int ListeTrajets::Retirer(int position)
+int ListeTrajets::RetirerDernier()
 // Algorithme :
 //
 {
-    if(position < 0 || position >= nbTrajets)
-    {
-        return -1;
-    }
-
-    delete liste[position];
-
-    for(int i=position;i<(nbTrajets-1);i++)
-    {
-        liste[i]=liste[i+1];
-    }
-
+    delete liste[nbTrajets-1];
     nbTrajets--;
 
     return 0;
@@ -92,6 +81,23 @@ int ListeTrajets::Retirer(int position)
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+
+ListeTrajets::ListeTrajets ( const ListeTrajets & unListeTrajets)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <ListeTrajets>" << endl;
+#endif
+
+    liste = new Trajet * [unListeTrajets.tailleMax];
+    Trajet** trajets=unListeTrajets.GetListe();
+    for(int i=0;i<unListeTrajets.nbTrajets;i++)
+    {
+        liste[i] = new Trajet (*trajets[i]);
+    }
+} //----- Fin de ListeTrajets (constructeur de copie)
+
 
 ListeTrajets::ListeTrajets (const int taille) : tailleMax(taille), nbTrajets(0)
 // Algorithme :
@@ -112,7 +118,10 @@ ListeTrajets::~ListeTrajets ( )
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
-   delete [] liste;
+    for(int i=0;i<nbTrajets;i++)
+        delete liste[i];
+
+    delete [] liste;
 } //----- Fin de ~ListeTrajets
 
 
