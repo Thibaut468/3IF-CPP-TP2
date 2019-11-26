@@ -187,7 +187,7 @@ char * Catalogue::askVilleArrivee()
 // Algorithme :
 //
 {
-   char* ret=new char(TAILLE_ENTREE_VILLE);
+   char* ret=new char[TAILLE_ENTREE_VILLE+1];
    cout << "Saisir la ville d'arrivée: " << endl;
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
@@ -197,7 +197,7 @@ char * Catalogue::askVilleDepart()
 // Algorithme :
 //
 {
-  char* ret=new char(TAILLE_ENTREE_VILLE);
+   char* ret = new char[TAILLE_ENTREE_VILLE+1];
    cout << "Saisir la ville de départ : " << endl;
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
@@ -207,7 +207,7 @@ char * Catalogue::askMoyenTransport()
 // Algorithme :
 //
 {
-   char* ret=new char(TAILLE_ENTREE_VILLE);
+   char* ret=new char[TAILLE_ENTREE_MOYEN_TRANSPORT+1];
    cout << "Saisir le moyen de transport : " << endl;
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
@@ -243,7 +243,7 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
             {
                 trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
                 RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
-                trajetsPossibles->Retirer(trajetsPossibles->GetNbTrajets()-1);        //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
+                trajetsPossibles->Retirer((trajetsPossibles->GetNbTrajets())-1);        //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
             }
         }
     }

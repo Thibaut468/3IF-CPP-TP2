@@ -55,7 +55,6 @@ void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
 
    liste[nbTrajets] = nouveauTrajet;
    nbTrajets=nbTrajets+1;
-   cout << "Trajet n°" << nbTrajets << endl;
 } //----- Fin de addTrajet
 
 

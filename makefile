@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-g -Wall -Werror -ansi -pedantic -std=c++11
-DFLAGS=-DMAP
+DFLAGS=
 
 MAIN=exec
 SRCS= Trajet.cpp TrajetSimple.cpp TrajetCompose.cpp ListeTrajets.cpp Catalogue.cpp Mapper.cpp
