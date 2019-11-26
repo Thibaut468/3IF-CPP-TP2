@@ -267,7 +267,6 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
             }
             if(valide)
             {
-                t->Affichage();
                 trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
                 RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
                 trajetsPossibles->RetirerDernier();                                   //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds

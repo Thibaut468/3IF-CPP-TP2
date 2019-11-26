@@ -92,6 +92,8 @@ ListeTrajets::ListeTrajets ( const ListeTrajets & unListeTrajets)
 
     liste = new Trajet * [unListeTrajets.tailleMax];
     Trajet** trajets=unListeTrajets.GetListe();
+    tailleMax=unListeTrajets.tailleMax;
+    nbTrajets=unListeTrajets.nbTrajets;
     for(int i=0;i<unListeTrajets.nbTrajets;i++)
     {
         liste[i] = new Trajet (*trajets[i]);
@@ -119,8 +121,9 @@ ListeTrajets::~ListeTrajets ( )
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
     for(int i=0;i<nbTrajets;i++)
+    {
         delete liste[i];
-
+    }
     delete [] liste;
 } //----- Fin de ~ListeTrajets
 
