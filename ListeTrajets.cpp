@@ -73,18 +73,21 @@ int ListeTrajets::Retirer(int position)
 // Algorithme :
 //
 {
-  if(position < 0 || position >= nbTrajets)
-  {
-    return -1;
-  }
-  for(int i=position;i<nbTrajets-1;i++)
-  {
-    liste[i]=liste[i+1];
-  }
-  delete liste[nbTrajets-1];
-  nbTrajets--;
-  return 0;
+    if(position < 0 || position >= nbTrajets)
+    {
+        return -1;
+    }
 
+    delete liste[position];
+
+    for(int i=position;i<(nbTrajets-1);i++)
+    {
+        liste[i]=liste[i+1];
+    }
+
+    nbTrajets--;
+
+    return 0;
 } //----- Fin de Retirer
 
 //------------------------------------------------- Surcharge d'opérateurs

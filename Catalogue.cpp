@@ -130,8 +130,9 @@ void Catalogue::RechercheComplexe()
 {
    char * vDepart=askVilleDepart();
    char * vArrivee=askVilleArrivee();
-//   ListeTrajets* trajetsPossibles=new ListeTrajets();
-//   RechercheEtape(vDepart,vArrivee,trajetsPossibles);   // Ne fonctionne pas encore, problème sur la methode Retirer de TrajetSimple
+   ListeTrajets* trajetsPossibles=new ListeTrajets();
+   RechercheEtape(vDepart,vArrivee,trajetsPossibles);   // Ne fonctionne pas encore, problème sur la methode Retirer de TrajetSimple
+   delete trajetsPossibles;
 } //----- Fin de RechercheComplexe
 
 void Catalogue::Presenter()
@@ -155,43 +156,6 @@ void Catalogue::Presenter()
    }
 } //----- Fin de Presenter
 
-int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles)
-//Algorithme : Methode recursive
-//
-{
-  Trajet** liste=listeTraj.GetListe();
-  if(strcmp(departTrajet,arriveeFinale)==0) // si ville de départ et d'arrivee sont les mêmes: signifie qu'on à atteint notre destination
-  {
-
-    trajetsPossibles->AffichageTrajets();
-    return 1;
-  }
-
-  for(int i =0;i<listeTraj.GetNbTrajets();i++)
-  {
-    Trajet* t=liste[i];
-
-    if(strcmp(t->GetVilleDepart(),departTrajet)==0) //si le trajet t auquel on s'intéresse part bien du même point que le noeud ou l'on est actuellement
-    {
-      int valide=1;
-
-      for(int j=0;j<trajetsPossibles->GetNbTrajets();j++)
-      {
-        if(strcmp(t->GetVilleArrivee(),trajetsPossibles->GetListe()[j]->GetVilleDepart())) //si la ville d'arrivée est déja présente
-        {                                                                     //dans les trajets possible en tant que ville de départ
-          valide=0;        //afin de ne pas créer de boucle infinie
-        }
-      }
-      if(valide)
-      {
-        trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
-        RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
-        trajetsPossibles->Retirer(trajetsPossibles->GetNbTrajets()-1);        //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
-      }
-    }
-  }
-  return 0;
-}// Fin de RechercheEtape
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -248,5 +212,42 @@ char * Catalogue::askMoyenTransport()
    cin.getline(ret,TAILLE_ENTREE_VILLE);
    return ret;
 } //----- Fin de AskMoyenTransport
+
+int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles)
+//Algorithme : Methode recursive
+//
+{
+    Trajet** liste=listeTraj.GetListe();
+    if(strcmp(departTrajet,arriveeFinale)==0) // si ville de départ et d'arrivee sont les mêmes: signifie qu'on à atteint notre destination
+    {
+        trajetsPossibles->AffichageTrajets();
+        return 1;
+    }
+
+    for(int i =0;i<listeTraj.GetNbTrajets();i++)
+    {
+        Trajet* t=liste[i];
+
+        if(strcmp(t->GetVilleDepart(),departTrajet)==0) //si le trajet t auquel on s'intéresse part bien du même point que le noeud ou l'on est actuellement
+        {
+            int valide=1;
+
+            for(int j=0;j<trajetsPossibles->GetNbTrajets();j++)
+            {
+                if(strcmp(t->GetVilleArrivee(),trajetsPossibles->GetListe()[j]->GetVilleDepart())) //si la ville d'arrivée est déja présente
+                {                                                                     //dans les trajets possible en tant que ville de départ
+                    valide=0;        //afin de ne pas créer de boucle infinie
+                }
+            }
+            if(valide)
+            {
+                trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
+                RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
+                trajetsPossibles->Retirer(trajetsPossibles->GetNbTrajets()-1);        //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
+            }
+        }
+    }
+    return 0;
+}// Fin de RechercheEtape
 
 //----------------------------------------------------- Méthodes protégées

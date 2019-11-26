@@ -70,12 +70,6 @@ public:
     // Contrat :
     //
 
-    int RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -113,6 +107,12 @@ protected:
    //
    // Contrat :
    //
+
+    int RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 //----------------------------------------------------- Attributs protégés
 
    ListeTrajets listeTraj;
