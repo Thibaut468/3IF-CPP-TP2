@@ -91,7 +91,7 @@ ListeTrajets::ListeTrajets ( const ListeTrajets & unListeTrajets)
 #endif
 
     liste = new Trajet * [unListeTrajets.tailleMax];
-    Trajet** trajets=unListeTrajets.GetListe();
+    Trajet** trajets = unListeTrajets.GetListe();
     tailleMax=unListeTrajets.tailleMax;
     nbTrajets=unListeTrajets.nbTrajets;
     for(int i=0;i<unListeTrajets.nbTrajets;i++)
@@ -113,7 +113,7 @@ ListeTrajets::ListeTrajets (const int taille) : tailleMax(taille), nbTrajets(0)
 } //----- Fin de ListeTrajets
 
 
-ListeTrajets::~ListeTrajets ( )
+ListeTrajets::~ListeTrajets ()
 // Algorithme :
 //
 {

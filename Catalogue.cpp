@@ -240,8 +240,8 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
 //
 {
 
-    ListeTrajets* trajets=new ListeTrajets(listeTraj);
-    Trajet** liste=trajets->GetListe();
+    ListeTrajets trajets = ListeTrajets(listeTraj);
+    Trajet** liste=trajets.GetListe();
 
     if(strcmp(departTrajet,arriveeFinale)==0) // si ville de départ et d'arrivee sont les mêmes: signifie qu'on à atteint notre destination
     {
@@ -250,7 +250,7 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
         cout<<endl<<endl;
         return 1;
     }
-    for(int i=0;i<trajets->GetNbTrajets();i++)
+    for(int i=0;i<trajets.GetNbTrajets();i++)
     {
         Trajet* t=liste[i];
 
