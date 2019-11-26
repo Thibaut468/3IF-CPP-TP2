@@ -250,7 +250,7 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
         cout<<endl<<endl;
         return 1;
     }
-    for(int i =0;i<listeTraj.GetNbTrajets();i++)
+    for(int i=0;i<trajets->GetNbTrajets();i++)
     {
         Trajet* t=liste[i];
 
@@ -273,7 +273,8 @@ int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTr
             }
         }
     }
-    delete trajets;
+
+    //delete trajets;
     return 0;
 }// Fin de RechercheEtape
 
