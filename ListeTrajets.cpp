@@ -57,24 +57,11 @@ void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
    nbTrajets=nbTrajets+1;
 } //----- Fin de addTrajet
 
-
-void ListeTrajets::AffichageTrajets() const
-// Algorithme :
-//
-{
-  for(int i = 0; i < nbTrajets; i++ )
-  {
-    liste[i]->Affichage();
-  }
-} //----- Fin de AffichageTrajets
-
 int ListeTrajets::RetirerDernier()
 // Algorithme :
 //
 {
-    delete liste[nbTrajets-1];
     nbTrajets--;
-
     return 0;
 } //----- Fin de Retirer
 
@@ -82,7 +69,7 @@ int ListeTrajets::RetirerDernier()
 
 //-------------------------------------------- Constructeurs - destructeur
 
-ListeTrajets::ListeTrajets ( const ListeTrajets & unListeTrajets)
+ListeTrajets::ListeTrajets (const ListeTrajets & unListeTrajets)
 // Algorithme :
 //
 {
@@ -91,12 +78,11 @@ ListeTrajets::ListeTrajets ( const ListeTrajets & unListeTrajets)
 #endif
 
     liste = new Trajet * [unListeTrajets.tailleMax];
-    Trajet** trajets = unListeTrajets.GetListe();
     tailleMax=unListeTrajets.tailleMax;
     nbTrajets=unListeTrajets.nbTrajets;
     for(int i=0;i<unListeTrajets.nbTrajets;i++)
     {
-        liste[i] = new Trajet (*trajets[i]);
+        liste[i] = unListeTrajets.GetListe()[i];
     }
 } //----- Fin de ListeTrajets (constructeur de copie)
 
@@ -120,10 +106,6 @@ ListeTrajets::~ListeTrajets ()
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
-    for(int i=0;i<nbTrajets;i++)
-    {
-        delete liste[i];
-    }
     delete [] liste;
 } //----- Fin de ~ListeTrajets
 

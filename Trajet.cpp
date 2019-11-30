@@ -29,7 +29,7 @@ using namespace std;
 #ifdef MAP
     cout << "Appel a l'affichage de <Trajet>" << endl;
 #endif
-  cout << "Trajet de: " << villeDepart << " à " << villeArrivee << endl;
+  cout << "Trajet de " << villeDepart << " à " << villeArrivee;
 } //----- Fin de Affichage
 
 char* Trajet::GetVilleDepart () const

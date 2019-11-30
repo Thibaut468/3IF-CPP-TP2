@@ -108,11 +108,12 @@ protected:
    // Contrat :
    //
 
-    int RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles);
+    int RechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles);
     // Mode d'emploi :
     //
     // Contrat :
     //
+
 //----------------------------------------------------- Attributs protégés
 
    ListeTrajets listeTraj;

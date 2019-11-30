@@ -34,7 +34,7 @@ int main()
 
    while(!end)
    {
-      cout << "Menu:" << endl;
+      cout << endl << "Menu:" << endl;
       cout << "\t1: Ajouter un trajet simple" << endl;
       cout << "\t2: Ajouter un trajet composé" << endl;
       cout << "\t3: Afficher le catalogue" << endl;

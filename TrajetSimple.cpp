@@ -36,13 +36,27 @@ void TrajetSimple::Affichage () const
 #endif
 
   Trajet::Affichage();
-  cout <<" Trajet Simple. Moyen de transport : " << moyenTransport << endl;
+  cout <<" en " << moyenTransport << endl;
 
   //Affichage des etapes
 } //----- Fin de Affichage
 
 
 //-------------------------------------------- Constructeurs - destructeur
+TrajetSimple::TrajetSimple(const TrajetSimple &unTrajetSimple) : Trajet(unTrajetSimple.villeDepart,unTrajetSimple.villeArrivee)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Trajet Simple>" << endl;
+#endif
+
+    moyenTransport = new char [strlen(unTrajetSimple.moyenTransport) + 1];
+    strcpy( moyenTransport, unTrajetSimple.moyenTransport);
+
+
+} //----- Fin de Trajet Simple (constructeur de copie)
+
 TrajetSimple::TrajetSimple (const char* vDepart, const char* vArrivee, const char* mTransport) : Trajet(vDepart, vArrivee)
 // Algorithme :
 //

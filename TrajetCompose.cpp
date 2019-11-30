@@ -32,17 +32,34 @@ void TrajetCompose::Affichage () const
 
   Trajet::Affichage();
 
-  cout <<" Trajet composé. Liste des Etapes: " << endl;
+  cout <<". Trajet composé de " << etapes->GetNbTrajets() << " étapes :" << endl;
 
-  etapes->AffichageTrajets();
+  for(int i=0;i<etapes->GetNbTrajets();i++)
+  {
+      cout << "     " << "Etape " << i+1 << " : ";
+      etapes->GetListe()[i]->Affichage();
+  }
 
+  cout << endl;
   //Affichage des etapes
 } //----- Fin de Affichage
 
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose (const char* vDepart, const char* vArrivee, ListeTrajets* liste) : Trajet(vDepart , vArrivee)
+TrajetCompose::TrajetCompose(const TrajetCompose & unTrajetCompose ) : Trajet(unTrajetCompose.villeDepart,unTrajetCompose.villeArrivee)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Trajet Compose>" << endl;
+#endif
+
+    *etapes=ListeTrajets(*unTrajetCompose.etapes);
+
+} //----- Fin de Trajet Compose (constructeur de copie)
+
+TrajetCompose::TrajetCompose (const char* vDepart, const char* vArrivee, ListeTrajets * liste) : Trajet(vDepart , vArrivee)
 // Algorithme :
 //
 {
@@ -64,7 +81,11 @@ TrajetCompose::~TrajetCompose ( )
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
 
-delete etapes;
+    for(int i=0;i<etapes->GetNbTrajets();i++)
+        delete etapes->GetListe()[i];
+
+    delete etapes;
+
 } //----- Fin de ~TrajetCompose
 
 

@@ -133,14 +133,17 @@ void Catalogue::RechercheSimple()
    char * vDepart=askVilleDepart();
    char * vArrivee=askVilleArrivee();
 
-   cout << "-- Résultat de la recherche simple entre " << vDepart << " et " << vArrivee << " --" << endl;
+   cout << "-- Résultat de la recherche simple entre " << vDepart << " et " << vArrivee << " --" << endl << endl;
 
    Trajet ** listeTmp = listeTraj.GetListe();
    int nbTrajets = listeTraj.GetNbTrajets();
    for(int i=0;i<nbTrajets;i++)
    {
       if(strcmp(listeTmp[i]->GetVilleDepart(),vDepart)==0 && strcmp(listeTmp[i]->GetVilleArrivee(),vArrivee)==0)
-         listeTmp[i]->Affichage();
+      {
+          listeTmp[i]->Affichage();
+          cout << endl;
+      }
 
    }
 } //----- Fin de RechercheSimple
@@ -152,9 +155,21 @@ void Catalogue::RechercheComplexe()
 {
    char * vDepart=askVilleDepart();
    char * vArrivee=askVilleArrivee();
-   ListeTrajets* trajetsPossibles=new ListeTrajets();
-   RechercheEtape(vDepart,vArrivee,trajetsPossibles);   // Ne fonctionne pas encore, problème sur la methode Retirer de TrajetSimple
-   delete trajetsPossibles;
+   ListeTrajets trajetsPossibles = ListeTrajets();
+
+    cout << endl << "-- Résultat de la recherche complexe entre " << vDepart << " et " << vArrivee << " --" << endl << endl ;
+
+   int nb = RechercheEtape(vDepart,vArrivee,trajetsPossibles);
+
+   if(nb==0)
+   {
+       cout << "            AUCUN TRAJET DISPONIBLE" << endl;
+   }
+
+   cout << "---- Fin de la recherche complexe : " << nb << " ont étés proposées ----" << endl;
+
+   delete [] vDepart;
+   delete [] vArrivee;
 } //----- Fin de RechercheComplexe
 
 void Catalogue::Presenter()
@@ -171,9 +186,11 @@ void Catalogue::Presenter()
    {
       Trajet ** traj = listeTraj.GetListe();
       cout << "---------- CONTENU DU CATALOGUE ----------" << endl;
+      cout << endl;
       for(int i=0; i<nbTrajets;i++)
       {
-         traj[i]->Affichage();
+          traj[i]->Affichage();
+          cout << endl;
       }
    }
 } //----- Fin de Presenter
@@ -200,6 +217,8 @@ Catalogue::~Catalogue ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
+    for(int i=0;i<listeTraj.GetNbTrajets();i++)
+        delete listeTraj.GetListe()[i];
 } //----- Fin de ~Catalogue
 
 
@@ -235,47 +254,49 @@ char * Catalogue::askMoyenTransport()
    return ret;
 } //----- Fin de AskMoyenTransport
 
-int Catalogue::RechercheEtape(char * departTrajet, char * arriveeFinale, ListeTrajets* trajetsPossibles)
+int Catalogue::RechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles)
 //Algorithme : Methode recursive
 //
 {
-
-    ListeTrajets trajets = ListeTrajets(listeTraj);
-    Trajet** liste=trajets.GetListe();
+    int condition;
+    int compteurTrajets = 0;
 
     if(strcmp(departTrajet,arriveeFinale)==0) // si ville de départ et d'arrivee sont les mêmes: signifie qu'on à atteint notre destination
     {
-        cout<<"liste des trajets possibles"<<endl;
-        trajetsPossibles->AffichageTrajets();
-        cout<<endl<<endl;
+
+        for(int i = 0;i<trajetsPossibles.GetNbTrajets();i++)
+        {
+            trajetsPossibles.GetListe()[i]->Affichage();
+        }
+
+            cout << endl;
+
         return 1;
     }
-    for(int i=0;i<trajets.GetNbTrajets();i++)
+
+    for(int i=0;i<listeTraj.GetNbTrajets();i++)
     {
-        Trajet* t=liste[i];
+        Trajet* t=listeTraj.GetListe()[i];
 
         if(strcmp(t->GetVilleDepart(),departTrajet)==0) //si le trajet t auquel on s'intéresse part bien du même point que le noeud ou l'on est actuellement
         {
-            int valide=1;
+            condition=1;
 
-            for(int j=0;j<trajetsPossibles->GetNbTrajets();j++)
+            for(int j=0;j<trajetsPossibles.GetNbTrajets();j++)
+                if(strcmp(t->GetVilleArrivee(),trajetsPossibles.GetListe()[j]->GetVilleDepart())==0) //si la ville d'arrivée est déja présente dans les trajets possible en tant que ville de départ
+                    condition=0;        //afin de ne pas créer de boucle infini
+
+            if(condition)
             {
-                if(strcmp(t->GetVilleArrivee(),trajetsPossibles->GetListe()[j]->GetVilleDepart())==0) //si la ville d'arrivée est déja présente
-                {                                                                     //dans les trajets possible en tant que ville de départ
-                    valide=0;        //afin de ne pas créer de boucle infinie
-                }
-            }
-            if(valide)
-            {
-                trajetsPossibles->AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
-                RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
-                trajetsPossibles->RetirerDernier();                                   //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
+                trajetsPossibles.AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
+                compteurTrajets+=RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
+                trajetsPossibles.RetirerDernier();                                   //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
             }
         }
     }
 
-    //delete trajets;
-    return 0;
+    return compteurTrajets;
 }// Fin de RechercheEtape
+
 
 //----------------------------------------------------- Méthodes protégées

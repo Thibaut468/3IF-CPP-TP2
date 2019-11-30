@@ -55,12 +55,6 @@ public:
     // Contrat :
     //
 
-    void AffichageTrajets() const;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
     int RetirerDernier();
     // Mode d'emploi :
     //

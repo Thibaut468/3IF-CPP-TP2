@@ -36,6 +36,12 @@ public:
     //
 
 //-------------------------------------------- Constructeurs - destructeur
+    TrajetSimple (const TrajetSimple & unTrajetSimple);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     TrajetSimple (const char* vDepart, const char* vArrivee, const char* mTransport);
     // Mode d'emploi :
     //
