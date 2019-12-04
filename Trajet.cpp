@@ -2,7 +2,7 @@
                            Trajet  -  description
                              -------------------
     début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
+    copyright            : (C) 2019 par BRANCHEREAU,GRAVEY
     e-mail               : $EMAIL$
 *************************************************************************/
 
@@ -24,24 +24,18 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
  void Trajet::Affichage () const
 // Algorithme :
-//
+// affichage dans la console des attributs
 {
-#ifdef MAP
-    cout << "Appel a l'affichage de <Trajet>" << endl;
-#endif
+
   cout << "Trajet de " << villeDepart << " à " << villeArrivee;
 } //----- Fin de Affichage
 
 char* Trajet::GetVilleDepart () const
-// Algorithme :
-//
 {
    return villeDepart;
 } //----- Fin de GetVilleDepart
 
 char* Trajet::GetVilleArrivee () const
-// Algorithme :
-//
 {
    return villeArrivee;
 } //----- Fin de GetVilleArrivee
@@ -50,7 +44,9 @@ char* Trajet::GetVilleArrivee () const
 
 Trajet::Trajet ( const Trajet & unTrajet )
 // Algorithme :
-//
+// Constructeur de copie de Trajet: attribut deux nouvelles case mémoires pour
+//les attributs villeDepart et villeArrivee et copie les valeurs du Trajet en
+//paramètre avec strcpy.
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Trajet>" << endl;
@@ -64,7 +60,9 @@ Trajet::Trajet ( const Trajet & unTrajet )
 
 Trajet::Trajet ( const char* vDepart, const char* vArrivee )
 // Algorithme :
-//
+// Constructeur de la classe: attribut deux cases mémoires de la taille des
+//chaines de charactere  pour villeDepart et villeArrivee, et copie les chaines
+// de caractère avec strcpy.
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Trajet>" << endl;
@@ -79,7 +77,8 @@ Trajet::Trajet ( const char* vDepart, const char* vArrivee )
 
 Trajet::~Trajet ( )
 // Algorithme :
-//
+// Destrcteur de la classe: delete des deux chaines de caractère: villeDepart
+// et villeArrivee
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Trajet>" << endl;

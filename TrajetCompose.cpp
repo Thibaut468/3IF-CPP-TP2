@@ -24,12 +24,10 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 void TrajetCompose::Affichage () const
 // Algorithme :
-//
+// fait appel a l'affichage de la classe mère Trajet pour afficher les villes de
+// départ et d'arrivée. Appelle ensuite l'affichage de chaque TrajetSimple composant
+// la liste des trajets composés 
 {
-#ifdef MAP
-    cout << "Appel à l'affichage de <TrajetCompose>" << endl;
-#endif
-
   Trajet::Affichage();
 
   cout <<". Trajet composé de " << etapes->GetNbTrajets() << " étapes :" << endl;
