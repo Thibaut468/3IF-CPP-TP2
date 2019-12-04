@@ -135,6 +135,7 @@ void Catalogue::RechercheSimple()
 
    char * vDepart=askVilleDepart();
    char * vArrivee=askVilleArrivee();
+   bool trouve = false;
 
    cout << "-- Résultat de la recherche simple entre " << vDepart << " et " << vArrivee << " --" << endl << endl;
 
@@ -145,10 +146,20 @@ void Catalogue::RechercheSimple()
       if(strcmp(listeTmp[i]->GetVilleDepart(),vDepart)==0 && strcmp(listeTmp[i]->GetVilleArrivee(),vArrivee)==0)
       {
           listeTmp[i]->Affichage();
+          trouve=true;
           cout << endl;
       }
-
    }
+
+   if(!trouve)
+   {
+       cout << "            AUCUN TRAJET DISPONIBLE" << endl << endl;
+   }
+
+    cout << "-----------------------------------------------------------" << endl;
+
+   delete [] vDepart;
+   delete [] vArrivee;
 } //----- Fin de RechercheSimple
 
 
@@ -169,7 +180,7 @@ void Catalogue::RechercheComplexe()
        cout << "            AUCUN TRAJET DISPONIBLE" << endl;
    }
 
-   cout << "---- Fin de la recherche complexe : " << nb << " ont étés proposées ----" << endl;
+   cout << endl << "---- Fin de la recherche complexe : " << nb << " ont étés proposées ----" << endl;
 
    delete [] vDepart;
    delete [] vArrivee;
