@@ -20,6 +20,9 @@ using namespace std;
 
 //------------------------------------------------------------- Constantes
 
+static const int TAILLE_ENTREE_VILLE = 45;
+static const int TAILLE_ENTREE_MOYEN_TRANSPORT = 20;
+
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -159,7 +162,7 @@ void Catalogue::RechercheComplexe()
 
     cout << endl << "-- Résultat de la recherche complexe entre " << vDepart << " et " << vArrivee << " --" << endl << endl ;
 
-   int nb = RechercheEtape(vDepart,vArrivee,trajetsPossibles);
+   int nb = rechercheEtape(vDepart,vArrivee,trajetsPossibles);
 
    if(nb==0)
    {
@@ -172,31 +175,32 @@ void Catalogue::RechercheComplexe()
    delete [] vArrivee;
 } //----- Fin de RechercheComplexe
 
-void Catalogue::Presenter()
+//------------------------------------------------- Surcharge d'opérateurs
+
+ostream & operator << (ostream & flux, const Catalogue & unCatalogue)
 // Algorithme :
 //
 {
-   int nbTrajets = listeTraj.GetNbTrajets();
-   cout << nbTrajets << endl;
-   if(nbTrajets==0)
-   {
-      cout << "---------- CATALOGUE VIDE ----------" << endl;
-   }
-   else
-   {
-      Trajet ** traj = listeTraj.GetListe();
-      cout << "---------- CONTENU DU CATALOGUE ----------" << endl;
-      cout << endl;
-      for(int i=0; i<nbTrajets;i++)
-      {
-          traj[i]->Affichage();
-          cout << endl;
-      }
-   }
-} //----- Fin de Presenter
+    int nbTrajets = unCatalogue.listeTraj.GetNbTrajets();
+    cout << nbTrajets << endl;
+    if(nbTrajets==0)
+    {
+        cout << "---------- CATALOGUE VIDE ----------" << endl;
+    }
+    else
+    {
+        Trajet ** traj = unCatalogue.listeTraj.GetListe();
+        cout << "---------- CONTENU DU CATALOGUE ----------" << endl;
+        cout << endl;
+        for(int i=0; i<nbTrajets;i++)
+        {
+            traj[i]->Affichage();
+            cout << endl;
+        }
 
-//------------------------------------------------- Surcharge d'opérateurs
-
+        cout << "-------------------------------------------" << endl;
+    }
+} //----- Fin de surcharge opérateur <<
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -218,7 +222,9 @@ Catalogue::~Catalogue ( )
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
     for(int i=0;i<listeTraj.GetNbTrajets();i++)
+    {
         delete listeTraj.GetListe()[i];
+    }
 } //----- Fin de ~Catalogue
 
 
@@ -254,7 +260,7 @@ char * Catalogue::askMoyenTransport()
    return ret;
 } //----- Fin de AskMoyenTransport
 
-int Catalogue::RechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles)
+int Catalogue::rechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles)
 //Algorithme : Methode recursive
 //
 {
@@ -283,13 +289,16 @@ int Catalogue::RechercheEtape(const char * departTrajet, const char * arriveeFin
             condition=1;
 
             for(int j=0;j<trajetsPossibles.GetNbTrajets();j++)
-                if(strcmp(t->GetVilleArrivee(),trajetsPossibles.GetListe()[j]->GetVilleDepart())==0) //si la ville d'arrivée est déja présente dans les trajets possible en tant que ville de départ
-                    condition=0;        //afin de ne pas créer de boucle infini
-
+            {
+                if (strcmp(t->GetVilleArrivee(), trajetsPossibles.GetListe()[j]->GetVilleDepart()) ==0) //si la ville d'arrivée est déja présente dans les trajets possible en tant que ville de départ
+                {
+                    condition = 0;        //afin de ne pas créer de boucle infini
+                }
+            }
             if(condition)
             {
                 trajetsPossibles.AddTrajet(t);                                       //On ajoute une arrête à explorer à partir de ce noeud
-                compteurTrajets+=RechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
+                compteurTrajets+=rechercheEtape(t->GetVilleArrivee(),arriveeFinale,trajetsPossibles);  //On part explorer cette arrête
                 trajetsPossibles.RetirerDernier();                                   //On retire cette arrête pour ne pas l'explorer à partir des autres noeuds
             }
         }

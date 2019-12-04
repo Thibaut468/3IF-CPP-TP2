@@ -18,9 +18,6 @@
 
 //------------------------------------------------------------- Constantes
 
-const int TAILLE_ENTREE_VILLE = 45;
-const int TAILLE_ENTREE_MOYEN_TRANSPORT = 20;
-
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -36,11 +33,6 @@ class Catalogue
 public:
 //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    void Presenter();
     // Mode d'emploi :
     //
     // Contrat :
@@ -71,6 +63,8 @@ public:
     //
 
 //------------------------------------------------- Surcharge d'opérateurs
+
+friend ostream & operator << (ostream & flux, const Catalogue & unCatalogue);
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -108,7 +102,7 @@ protected:
    // Contrat :
    //
 
-    int RechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles);
+    int rechercheEtape(const char * departTrajet, const char * arriveeFinale, ListeTrajets trajetsPossibles);
     // Mode d'emploi :
     //
     // Contrat :
