@@ -22,25 +22,45 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
- void Trajet::Affichage () const
+void Trajet::Affichage () const
 // Algorithme :
 // affichage dans la console des attributs
 {
 
-  cout << "Trajet de " << villeDepart << " à " << villeArrivee;
+    cout << "Trajet de " << villeDepart << " à " << villeArrivee;
 } //----- Fin de Affichage
 
 char* Trajet::GetVilleDepart () const
 {
-   return villeDepart;
+    return villeDepart;
 } //----- Fin de GetVilleDepart
 
 char* Trajet::GetVilleArrivee () const
 {
-   return villeArrivee;
+    return villeArrivee;
 } //----- Fin de GetVilleArrivee
 
-//-------------------------------------------- Constructeurs - destructeur
+//-------------------------------------------- Destructeurs
+
+Trajet::~Trajet ( )
+// Algorithme :
+// Destrcteur de la classe: delete des deux chaines de caractère: villeDepart
+// et villeArrivee
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Trajet>" << endl;
+#endif
+
+    delete [] villeDepart;
+    delete [] villeArrivee;
+} //----- Fin de ~Trajet
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+
+//-------------------------------------------- Constructeurs
 
 Trajet::Trajet ( const Trajet & unTrajet )
 // Algorithme :
@@ -67,28 +87,9 @@ Trajet::Trajet ( const char* vDepart, const char* vArrivee )
 #ifdef MAP
     cout << "Appel au constructeur de <Trajet>" << endl;
 #endif
-  villeDepart = new char [strlen(vDepart) + 1];
-  villeArrivee = new char [strlen(vArrivee) + 1];
-  strcpy ( villeDepart, vDepart );
-  strcpy ( villeArrivee, vArrivee );
+    villeDepart = new char [strlen(vDepart) + 1];
+    villeArrivee = new char [strlen(vArrivee) + 1];
+    strcpy ( villeDepart, vDepart );
+    strcpy ( villeArrivee, vArrivee );
 
 } //----- Fin de Trajet
-
-
-Trajet::~Trajet ( )
-// Algorithme :
-// Destrcteur de la classe: delete des deux chaines de caractère: villeDepart
-// et villeArrivee
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Trajet>" << endl;
-#endif
-
-delete [] villeDepart;
-delete [] villeArrivee;
-} //----- Fin de ~Trajet
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
