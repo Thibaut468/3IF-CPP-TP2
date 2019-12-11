@@ -46,7 +46,9 @@ int ListeTrajets::GetNbTrajets() const
 
 void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
 // Algorithme :
-//
+// Si la quantitée de mémoire allouée n'est pas suffisante pour ajouter un trajet supplémentaire,
+// On appelle une méthode augmenterTaille pour augmenter la taille allouée.
+// On ajoute ensuite le pointeur vers trajet (obtenu en paramètre) au tableau dynamique
 {
    if(nbTrajets==tailleMax)
    {
@@ -59,7 +61,10 @@ void ListeTrajets::AddTrajet(Trajet* nouveauTrajet)
 
 int ListeTrajets::RetirerDernier()
 // Algorithme :
-//
+// On diminue le nombre de trajets pour ne pas prendre en compte le dernier trajet
+// cela ne provoque pas de fuite de mémoire car cette méthode n'est appellée que dans le cas
+// d'une copie de liste : il existe toujours d'autre pointeurs permettant de détruire ces trajets part
+// la suite dans la liste d'origine.
 {
     nbTrajets--;
     return 0;
@@ -71,7 +76,7 @@ int ListeTrajets::RetirerDernier()
 
 ListeTrajets::ListeTrajets (const ListeTrajets & unListeTrajets)
 // Algorithme :
-//
+// On recopie les éléments de la liste passée en paramètre un par un (parcours en prodondeur)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <ListeTrajets>" << endl;
@@ -101,7 +106,7 @@ ListeTrajets::ListeTrajets (const int taille) : tailleMax(taille), nbTrajets(0)
 
 ListeTrajets::~ListeTrajets ()
 // Algorithme :
-//
+// On supprime seulement le tableau dynamique, pas les trajets stockés dedans. 
 {
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
@@ -116,7 +121,8 @@ ListeTrajets::~ListeTrajets ()
 
  void ListeTrajets::augmenterTaille()
  // Algorithme :
- //
+ // On recrée un nouveau tableau dynamique, plus grand de NBAUGMENTATION que le tableau actuel.
+ // On copie ensuite un a un les pointeurs vers trajet.
 {
    tailleMax+=NBAUGMENTATION;
 

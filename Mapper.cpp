@@ -57,7 +57,7 @@ int main()
             catalogue.AddTrajetCompose();
             break;
          case 3:
-            catalogue.Presenter();
+            cout << catalogue;
             break;
          case 4:
             catalogue.RechercheSimple();
